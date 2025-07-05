@@ -1,22 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from 'react';
 
 function App() {
+
+  const [products, setProducts] = React.useState([]);
+
+  useEffect(() => {
+    getProducts();
+    return () => {
+    };
+  }, []);
+
+  const getProducts = async () => {
+    try {
+      const response = await fetch('https://server-ci-cd.chatify.click/api/v1/products');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setProducts(data);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
+  }
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>Product List</h1>
+        <ul>
+          {products.map(product => (
+            <li key={product.id}>
+              <h2>{product.name}</h2>
+              <p>{product.description}</p>
+              <p>Price: ${product.price}</p>
+            </li>
+          ))}
+        </ul>
       </header>
     </div>
   );
