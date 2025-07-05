@@ -47,5 +47,5 @@ jobs:
             docker pull ${{ secrets.DOCKER_USERNAME }}/react-app:latest
             docker stop react-app || true
             docker rm react-app || true
-            docker run -d --name react-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/react-app:latest
+            docker run -d --name react-app -p 4000:80 ${{ secrets.DOCKER_USERNAME }}/react-app:latest
 
