@@ -26,7 +26,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Danh sách sản phẩm</h1>
+        <h1>Danh sách sản phẩm 1</h1>
         <ul>
           {products.map(product => (
             <li key={product.id}>
